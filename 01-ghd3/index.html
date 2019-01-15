@@ -1,9 +1,173 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Homework 1- Haylea Northcott</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
 <body>
+  <div id = "svgcontainer"></div>
+    <script>
+      // Add an SVG
+        var svg = d3.select("#svgcontainer")
+                        .append("svg")
+                        .attr("width", 1000)
+                        .attr("height", 575);
+        // Add Circles
+        var circle = svg.append("circle")
+                           .attr("cx", 100)
+                           .attr("cy", 500)
+                           .attr("r", 50)
+                           .attr("stroke", "black")
+                           .attr("stroke-width", 5)
+                           .attr("fill", "red");
+                      svg.append("circle")
+                          .attr("cx", 225)
+                          .attr("cy", 500)
+                          .attr("r", 50)
+                          .attr("stroke", "black")
+                          .attr("stroke-width", 5)
+                          .attr("fill-opacity", .2)
+                          .attr("fill", "blue");
+                     svg.append("ellipse")
+                          .attr("cx", 350)
+                          .attr("cy", 500)
+                          .attr("rx", 40)
+                          .attr("ry", 25)
+                          .attr("stroke", "black")
+                          .attr("stroke-width", 5)
+                          .attr("fill", "teal")
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+        // Add Rectangles
+        var rectangle = svg.append("rect")
+                              .attr("width", 150)
+                              .attr("height", 100)
+                              .attr("x", 150)
+                              .attr("y", 300)
+                              .attr("stroke", "black")
+                              .attr("stroke-width", 5)
+                              .attr("fill", "pink");
+                        svg.append("rect")
+                              .attr("width", 50)
+                              .attr("height", 100)
+                              .attr("x", 50)
+                              .attr("y", 300)
+                              .attr("stroke", "black")
+                              .attr("stroke-width", 5)
+                              .attr("fill", "yellow");
+        // Add Lines
+        var line = svg.append("line")
+                          .attr("x1", 10)
+                          .attr("y1", 0)
+                          .attr("x2", 100)
+                          .attr("y2", 250)
+                          .attr("stroke", "green")
+                          .attr("stroke-width", 15);
+                    svg.append("line")
+                        .attr("x1", 200)
+                        .attr("y1", 0)
+                        .attr("x2", 200)
+                        .attr("y2", 250)
+                        .attr("stroke", "orange")
+                        .attr("stroke-width", 15);
+        // Add Polygons
+        var polygon = svg.append("polygon")
+                         .attr("points", "375,300 350,400 400,400")
+                         .attr("fill", "purple")
+                         .attr("stroke", "black")
+                         .attr("stroke-width", 5);
+                      svg.append("polygon")
+                          .attr("points", "375,10 375,115 450,50")
+                          .attr("fill", "blue")
+                          .attr("stroke", "black")
+                          .attr("stroke-width", 5);
+                      svg.append("rect")
+                          .attr("width", 75)
+                          .attr("height", 75)
+                          .attr("x", 335)
+                          .attr("y", 165)
+                          .attr("stroke", "black")
+                          .attr("stroke-width", 5)
+                          .attr("fill", "lime");
 
-</body>
+
+// Source code edited from: http://bl.ocks.org/cartoda/035f893cd5fc86bb955f
+        function transitions(){
+            var moveAllShapes = d3.select("#all").property("checked");
+            var moveAllCircles = d3.select("#circles").property("checked");
+            var moveAllPolygons = d3.select("#polygons").property("checked");
+            var moveAllLines = d3.select("#lines").property("checked");
+            var moveAllRectangles = d3.select("#rects").property("checked");
+            var colorChange = d3.select("#color").property("checked");
+
+            var lineTransition = d3.selectAll("line").transition();
+            var rectTransition = d3.selectAll("rect").transition();
+            var circleTransition = d3.selectAll("circle, ellipse").transition();
+            var polyTransition = d3.selectAll("polygon").transition();
+
+            if (moveAllShapes){
+                lineTransition.attr("transform", "translate(325, 75) rotate(60)").duration(1000);
+					      rectTransition.attr("transform", "translate(150, 50) rotate(10)").duration(1000);
+					      circleTransition.attr("transform", "translate(500, 0) rotate(5)").duration(1000);
+                polyTransition.attr("transform", "translate(400,5) rotate(40)").duration(1000);
+            }
+            if (moveAllCircles){
+              circleTransition.attr("transform", "translate(500, 0) rotate(5)").duration(1000);
+            }
+            if (moveAllPolygons){
+              polyTransition.attr("transform", "translate(400,5) rotate(40)").duration(1000);
+            }
+            if (moveAllLines){
+              lineTransition.attr("transform", "translate(325, 75) rotate(60)").duration(1000);
+            }
+            if(moveAllRectangles){
+              rectTransition.attr("transform", "translate(150, 50) rotate(10)").duration(1000);
+            }
+            // Different colors
+            if(colorChange){
+              lineTransition.style("stroke", "silver").duration(1000);
+              rectTransition.style("fill", "navy").duration(1000);
+              circleTransition.style("fill", "aqua").duration(1000);
+              polyTransition.style("fill", "olive").duration(1000);
+            }
+        }
+    </script>
+  <style>
+  {
+    background:#FFF;
+    text-align: left;
+    height: 600px;
+    width: 700px;
+  }
+  .singleRow
+  {
+    float: left;
+    width: 200px
+  }
+  h1{
+    text- align: center;
+    font-weight: bold;
+  }
+  fieldset{
+    min-width: 0;
+    width: 50%;
+</style>
+<body>
+  <h1>Move and Change Color of Shapes</h1>
+  </body>
+  <div id = "container">
+    <fieldset class= "singleRow">
+      <input id="all" type="checkbox" name="move" value="move" />Move All Shapes<br />
+      <input id="polygons" type="checkbox" name="move" value="polygons" />Move Polygons<br />
+      <input id="lines" type="checkbox" name="move" value="lines" />Move Lines<br />
+      </fieldset>
+      <fieldset class= "singleRow">
+      <input id="circles" type="checkbox" name="move" value="circles" />Move Circles<br />
+      <input id="rects" type="checkbox" name="move" value="rectangles" />Move Rectangles<br />
+      <input id="color" type="checkbox" name="color" value="color" />Color Change<br /><br />
+      </fieldset>
+      <fieldset>
+      <button onclick="transitions()" style="font-size : 15px">Go!</button>
+    </fieldset>
+    </div>
+  </body>
 </html>
